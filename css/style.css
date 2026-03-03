@@ -1,0 +1,836 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/*wczytanie zewnętrznej czcionki pochodzącej z Google Fonts*/
+:root{
+    --header-height:100px;
+}
+/*W sekcji root można zdefiniować zmienne, które będą wielokrotnie wykorzystywane w naszym projekcie. Na początek podajemy nazwę zmiennej (jakąkolwiek, bez polskich znaków, spacje zastępując myślinikami) poprzedzoną dwoma myślnikami, a następnie jej wartość. W miejscu, w którym będziemy ją wykorzystywać wstawiamy w miejsce konkretnej wartości odwołanie do zmiennej - var(--nazwa-zmiennej)*/
+*{
+    /*background: yellow;*/
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    -webkit-scroll-behavior: smooth;
+    /*powoduje dodanie płynnego przewijania strony po kliknięciu linku z menu. przedostek -webkit dla przeglądarek chrome i safari*/
+    font-family: "Roboto", sans-serif;
+}
+header{
+    background: #eee;
+    height: var(--header-height);/*w tym miejscu odwołujemy się do zmiennej zdefiniowanej w grupie root*/
+    display: flex;/*wyświetla cały nagłówek jako flex, domyślnie wyświetla się on jako wiersz*/
+    gap:10px;/*ustawia odległość przerwy pomiędzy poszczegolnymi elementami flexa*/
+    justify-content: space-between;/*justify-content wyrównuje element wzdłuż kierunku, w którym wyświetla się flex (domyślnie wiersz)*/
+    align-items: center;/*align-items wyrównuje element poprzecznie do kierunku, w którym wyświetla się flex (domyślnie wiersz)*/
+    position: sticky;/*powoduje przyklejenie elementu*/
+    top:0;/*i przykleja go do górnej krawędzi okna przeglądarki*/
+    z-index:999;/*umieszcza element na warstwie o podanym numerze (pozorne umieszczenie na osi z - głębokość ekranu. Użycie dużej wartości powoduje, że będzie on zawsze na górze*/
+}
+header .logo{
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header .logo img{
+    height: 80px;
+    width: auto;
+    /*box-shadow: 5px 5px 8px #000;*/
+    filter: drop-shadow(0px 0px 15px #c00);
+}
+header nav{
+    flex:8;/*użycie wartości 8 powoduje, że element ten będzie 8 razy szerszy niż bazowy, ustawiony dla header .tryb i .socialki*/
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+header nav li,header nav li a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    text-decoration: none;
+    color: #000;
+    text-transform: uppercase;/*zamiana całego tekstu w tej klasie na duże litery*/
+    transition:0.7s;/*czas trwania zmian dla parametrów, które będą po najechaniu posiadały inne wartości. Transition zawsze wstawia się w elemencie o stanie bazowym*/
+}
+header nav li a:hover{
+    background: #c00;
+    color: #fff;
+}
+header .tryb{
+    flex: 1;
+}
+header .socialki{
+    flex:1;
+}
+header .socialki a{
+    color:#000;
+    font-size:1.25rem;
+    transition: 0.7s;
+}
+header .socialki a:hover .fa-square-facebook{
+    color:#00f;
+}
+header .socialki a:hover .fa-square-youtube{
+    color:#c00;
+}
+#baner{
+    background:url(../img/bg1.jpg);/*podana ścieżka do pliku uwzględnia, że plik css, w którym znajduje się definicja tła znajduje się w innym folderze, niż follder główny. Jeżeli użyjemy linku img/1.jpg wówczas folder img będzie szukany wewnątrz folderu css. Użycie ../ powoduje przejście katalog wyżej*/
+    background-repeat: no-repeat;/*usuwa powtarzanie tła, ktore domyślnie jest ustawione na powtarzanie poziomo i pionowo*/
+    background-position: center;/*wyśrodkowuje obrazek tła. pozycja ma dwa parametry - poziomy i pionowy - i pozwala ustawić punkt zaczepienia tła w bloku, w którym obraz tła występuje. Bazowo jest to górny prawy róg. Punktami odniesienia są wszystkie rogi obrazu, połowy boków oraz środek*/
+    background-size: cover;/*powoduje rozciągniecie obrazu do dłuższego z boków bloku, wewnątrz którego tło się znajduje*/
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 5%;
+}
+#baner .kratka{
+    width: 300px;
+    min-height:400px;
+    background: rgba(0, 0, 0,0.7);/*dodatkowy parametr a w kolorze odpowiada za przezroczystość tła. wartości od 0 do 1 odpowiadają 0% do 100%*/
+    color: #fff;
+    display: flex;
+    flex-direction: column;/*obraca kierunek flexa z wiersza na kolumnę*/
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;/*w związku z obróceniem kierunku flexa na pionowy w flex-direction justify-content działa dalej zgodnie z kierunkiem flexa, a on teraz nie jest poziomy, tylko pionowy*/
+    padding:15px;
+    /*opacity: 0.7;*/
+}
+#baner .kratka h1{
+    font-size: 2rem;/*użycie jednostki rem powoduje, że czcionka będzie się odnosiła do czcionki bazowej dla systemu. Jeżeli używana była by skala em, wówczas odniesienie było by do poprzednio użytej wielkości czcionki. czyli jeżeli wcześniej zadeklarowalibyśmy jakiemuś elementowi font-size na 5em, a następnie temu na 3em, to docelowo czcionka by była najpierw powiększona x5, a potem jeszcze x3*/
+    font-weight: 200;/*zmienia grubość czcionki zgodnie z parametrami pochodzącymi z czcionki*/
+    text-transform: uppercase;
+}
+#baner .kratka a{
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    width: 100%;
+    transition: 0.7s;
+}
+#baner .kratka a:hover{
+    background: #fff;
+    color: #000;
+}
+#o-nas{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+#o-nas .obrazek{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+#o-nas .obrazek img{
+    width: 250px;
+    height: 250px;
+    border: 1px dashed #000;
+    border-radius: 50%;/*powoduje ustawienie zaokrągleń obramowania na 50% długości boku, co powoduje powstanie koła. Warunek - obiekt powinien być kwadratem*/
+    box-shadow:0 0 20px rgba(0, 0, 0,0.7);/*cień rzucany pod obiektem. Pierwszy z parametrów to przesunięcie poziome, drugi - pionowe, trzeci odległość na jaką pada cień, no i kolor cienia*/
+    background:#fff;
+    padding:10px;
+    transition: 0.7s;
+}
+#o-nas .obrazek img:hover{
+    border-radius: 50% 25px;
+}
+#o-nas .opis{
+    flex:2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+#o-nas .opis h2{
+    font-weight: 200;
+    font-size: 1.75rem;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+#o-nas .opis h2 span{
+    color: #c00;
+}
+/*subklasy before i after pozwalają na umieszczenie dodatkowych elementów przed i za elementem, do którego są przypisane*/
+#o-nas .opis h2::before{
+    content: '';/*pozwala na umieszczenie jakiejś zawartości z poziomu css. W tym przypadku - pozostawiony pusty - jest wykorzystany do wyświetlenia jakiegoś elementu graficznego*/
+    width: 20px;/*o takiej szerokości*/
+    height: 3px;/*o takiej wysokości*/
+    background: #c00; /*oraz takim tle. Aby ten element się wyświetlił musimy zmienić elementowi wyżej display na flex albo block*/
+    margin-right: 15px;  
+}
+#o-nas .opis h2::after{
+    content: '';
+    width: 20px;
+    height: 3px;
+    background: #000; 
+    margin-left: 15px;  
+}
+#o-nas .opis p{
+    column-count: 3;
+    column-gap: 40px;
+    column-rule: 2px solid #c00;
+}
+#paralaxa{
+    background:url(../img/bg2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;/*powoduje pokrycie obrazem obszaru całego diva, w którym ten obraz będzie umieszczony jako tło*/
+    background-attachment: fixed;/*powoduje przyklejenie obrazu tła do okna przeglądarki*/
+    display: flex;
+    align-items: center;
+    padding-left: 5%;
+}
+#paralaxa .kratka{
+    width: 300px;
+    min-height:400px;
+    background: rgba(0, 0, 0,0.7);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    padding:15px;
+    /*opacity: 0.7;*/
+}
+#paralaxa .kratka h1{
+    font-size: 2rem;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+#paralaxa .kratka a{
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    width: 100%;
+    transition: 0.7s;
+}
+#paralaxa .kratka a:hover{
+    background: #fff;
+    color: #000;
+}
+#panele{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+#panele .panel{
+    flex: 1;
+    width: 280px;
+    min-height: 350px;
+    border: 1px solid #c00;
+}
+#panele .paski{
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(-45deg,
+    #69f 25%, #444 25%, #444 50%,
+    #69f 50%, #69f 75%, #444 75%,
+    #444 100%); /*tło jako gradient liniowy. W pierszym parametrze podajemy kąt, pod jakim gradient będzie rozmieszczony w elemencie. W kolejnych krokach podajemy jakie kolory i w których miejscach obszaru będą występowały. Podanie tych samych wartości procentowych dla kolorów granicznych powoduje, że przeglądarka nie tworzy płynnego przejścia pomiędzy tymi kolorami, tylko odcina pierwszy w kolorów, zastępując go drugim*/
+    background-size: 40px 40px;    /*ustawienie wielkości tła. W związku z domyślną wartością dla powtarzania tła będzie się ono powtarzało poziomo i pionowo, aż do wypełnienia obszaru, w którym się znajduje*/
+    animation:animacjaTla 0.7s linear infinite;/*dodanie animacji. Pierwszy parametr to nazwa animacji, która musi być unikalna (bowiem animacji możemy mieć nieskończenie wiele). Nazwa nie powinna posiadać polskich znaków ani spacji. Drugi parametr to czas trwania animacji. Kolejny to jej przyrost - linear oznacza, że animacja coraz bardziej przyspiesza od jej początku do jej końca. Ostatni element to nieskończona ilość odtworzeń animacji, czyli jej zapętlenie*/
+    animation-play-state: paused; /*Początkowo animacja jest zatrzymana*/
+    filter: grayscale(1); /*dodaje filtr w postaci wyświetlania wszystkich elementów wewnątrz jako czarno-białe*/
+    position: relative;/*powoduje ustalenie tego diva jak nadrzędnego dla wszystkich elementów posiadających position:absolute znajdujących się wewnątrz elementu. W przypadku braku tego relative za bazowy element uznawane jest całe okno przeglądarki*/
+}
+#panele .paski:nth-child(2){/*dodaje warunek dla drugiego elementu dziecka znajdującego się w klasie .paski*/
+    background: linear-gradient(45deg,
+    #d0a 25%, #444 25%, #444 50%,
+    #d0a 50%, #d0a 75%, #444 75%,
+    #444 100%);
+    background-size: 40px 40px;
+}
+@keyframes animacjaTla{/*ustawienie klatek kluczowych dla animacji o nazwie wpisanej po keyframes*/
+    0%{/*początek animacji - pierwsza klatka*/
+        background-position:0;/*tło pozostaje w stanie początkowym*/
+    }
+    100%{/*koniec animacji - ostatnia klatka*/
+        background-position:40px;/*tło przesuwa się o jego pełny rozmiar zdefiniowany w background-size*/
+    }
+    /*pomiędzy pierwszą a ostatnią klatką przeglądarka wstawia sobie poszczególne wartości proporcjonalnie*/
+}
+#panele .paski:hover{
+    animation-play-state: running;/*po najechaniu na element animacja rozpoczyna się*/
+    filter: grayscale(0);/*po najechaniu na element usuwane jest wyświetlanie w trybie czarno-białym*/
+}
+#panele .paski img{
+    position: absolute;/*pozycja elementu liczona jest względem pierwszego napotkanego wyżej w obrębie struktury elementu, posiadającego przypisany parametr position:relative. Jeśli żaden nie ma go ustawionego, wówczas element jest pozycjonowany względem całego okna przeglądarki*/
+    bottom: 0;/*element jest przyciągany do dolnej krawędzi diva, w którym się znajduje*/
+    height: 90%;/*i jego wysokość ma mieć 90% wysokości diva, w którym się znajduje*/
+    transition: 0.7s;
+}
+#panele .paski:hover img{
+    height:110%;
+}
+#panele .paski p{
+    font-size: 3rem;
+    color: #fff;
+    background: rgba(0, 0, 0,0.7);
+    width: 90%;
+    position: absolute;
+    bottom: 5%;
+    text-align: center;
+    font-weight: 200;
+    text-transform: uppercase;
+    transform: scale(0);/*scale 0 powoduje zmniejszenie elementu do 0%, czyli jego zniknięcie*/
+    transition: 0.9s ease-in-out;/*ease-in-out powoduje, że animacja wykonuje się z łagodnym rozpoczęciem, potem przyspiesza i pod koniec zwalnia z łagodnym zakończeniem*/
+}
+#panele .paski:hover p{
+    transform: scale(1);/*po najechaniu element wyświetlany jest w swojej pierwotnej wielkości*/
+}
+#panele .panel .scan{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+}
+#panele .panel .scan .odcisk{
+    position: relative;
+    width: 250px;
+    height: 250px;
+    background: url(../img/fp_1.png);
+    background-size: 250px;
+}
+#panele .panel .scan .odcisk::before{/*nałożenie drugiego obrazu na pierwszy*/
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../img/fp_2.png);
+    background-size: 250px;
+    animation: fprint 4s ease-in-out infinite;
+}
+@keyframes fprint{/*animacja posiada trzy klatki kluczowe. Jej początek i koniec znajdują się w tym samym punkcie (na górze), a środek animacji to dół bloku. Animacja ta jest działaniem na wysokości drugiego tła zadeklarowanego za pomocą before*/
+    0%, 100%{
+        height: 0%;
+    }
+    50%{
+        height: 100%;
+    }
+}
+#panele .panel .scan .odcisk::after{/*Drugą subklasą wstawiana jest linia symulująca działanie skanera*/
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: #69f;
+    filter: drop-shadow(0 0 20px #69f) 
+    drop-shadow(0 0 60px #69f);/*rzucanie cienia wokół elementu. Parametry to przesunięcie w poziomie, pionie, odległość oraz kolor cienia. Podwójne użycie powoduje z różną odległością cienia powoduje, że na pierszych 20px cień ten jest nałożony podwójnie, przez co jest on lepiej widoczny.*/
+    animation: fprint-linia 4s ease-in-out infinite;
+}
+@keyframes fprint-linia{/*W tej animacji użyte jest przesunięcie elementu wypozycjonowanego absolutnie od jego bazowego położenia przy górnej krewędzi elementu w dół, aż do dolnej krawędzi elementu.*/
+    0%, 100%{
+        top: 0%;
+    }
+    50%{
+        top: 100%;
+    }
+}
+#panele .panel .scan h3{
+    color: #69f;
+    font-size: 1.25rem;
+    margin-top:20px;
+    filter: drop-shadow(0 0 20px #69f) 
+    drop-shadow(0 0 60px #69f);
+    font-family: consolas;/*Użycie czcionki wykorzystywanej przez system w konsoli lub terminalu*/
+    animation:fprint-tekst 1s steps(1) infinite;
+}
+@keyframes fprint-tekst{/*Miganie tekstu osiągnięte za pomocą widoczności elementu - od całkowitej przezroczystości, do całkowitej widoczności*/
+    0%,100%{
+        opacity:0;
+    }
+    50%{
+        opacity:1;
+    }
+}
+#panele .panel.obrotowy{
+    position: relative;
+}
+#panele .panel.obrotowy .face{/*wspólna klasa dla obu elementów*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color:#fff;
+    transition: 0.7s;
+}
+#panele .panel.obrotowy .face.face1{/*klasa dla pierwszego elementu, widocznego na początku*/
+    background: #69f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    z-index:1;
+    transform-origin: bottom;/*wszelkie transformacje następują względem dolnej krawędzi tego elementu*/
+}
+#panele .panel.obrotowy .face.face1 i{
+    font-size:3rem;
+}
+#panele .panel.obrotowy .face.face1 h3{
+    font-size:2.75rem;
+    font-weight: 200;
+}
+#panele .panel.obrotowy:hover .face.face1{/*transformacja obejmuje przesunięcie w pionie 0 100% do góry oraz obrócenie elemetu o 90 stopni, przez co staje się on niewidoczny*/
+    background: #c00;
+    transform: translateY(-100%) rotateX(90deg);
+}
+#panele .panel.obrotowy .face.face2{/*klasa dla drugiego elementu, ukrytego na początku*/
+    color: #000;
+    padding: 20px;
+    transform: translateY(100%) rotateX(90deg);/*element początkowo jest przesunięty w dół o 100% i obrócony o 90 stopni przez co staje się niewidoczny*/
+    transform-origin: top;/*wszelkie transformacje następują względem górnej krewędzi elementu*/
+}
+#panele .panel.obrotowy:hover .face.face2{
+    transform: translateY(0%) rotateX(0deg);/*aby element się wyświetlił ustawić należy mu warości początkowe, więc nie będzie ani przesunięty, ani obrócony*/
+}
+#galeria{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#galeria .siatka{
+    padding:40px;
+    position: relative;
+    display: grid;/*wyświetlenie elementu jako siatka*/
+    width: 1280px;/*zdefiniowanie szerokości siatki. Liczba tutaj podana musi być podzielna bez reszty przez ilość kolumn, które chcemy zastosować*/
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;/*definiuje ilość kolumn oraz ich szerokość. Zastosowanie 1fr określa, że wszystkie kolumny mają być tej samej szerokości*/
+    grid-template-rows: 280px 280px 280px 280px;/*definiuje ilość wierszy oraz ich wysokość. Jeśli elementów będzie więcej i nie zmieszczą się, przeglądarka wygeneruje automatycznie kolejny wiersz korzystając z wzorca podanych wysokości, czyli rozpoczynając od pierwszej napotkanej wartości i przechodząc do kolejnych w kolejnych wygenerowanych wierszach*/
+    grid-template-areas: "img1 img2 img2 img3"
+                         "img1 img4 img5 img5"
+                         "img6 img6 img7 img10"
+                         "img8 img8 img9 img10";
+                         /*określenie nazw pól siatki, odnoszące się do grid-name zdefiniowanych dla klas niżej*/
+}   
+#galeria .siatka .item{
+    position: relative;
+    border: 1px solid #ccc;
+}
+#galeria .siatka img{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;/*pozwala na wypełnienie obszaru elementu wyżej w całości zdjęciem, odnosząc się do jego którszego rozmiaru*/
+    filter: grayscale(1);/*włączenie trybu czarno-białego*/
+    opacity: 0.5;/*ustawienie przezroczystości na 50%*/
+    transition: 0.7s;
+}
+#galeria .siatka img:hover{
+    filter: grayscale(0);/*wyłączenie przezroczystości*/
+    opacity: 1;/*ustawienie pełnego krycia*/
+}
+#galeria .siatka .img1{
+    grid-area: img1;/*zdefiniowanie nazwy obszaru siatki, w którym będzie się wyświetlał element posiadający tę klasę*/
+}
+#galeria .siatka .img2{
+    grid-area: img2;
+}
+#galeria .siatka .img3{
+    grid-area: img3;
+}
+#galeria .siatka .img4{
+    grid-area: img4;
+}
+#galeria .siatka .img5{
+    grid-area: img5;
+}
+#galeria .siatka .img6{
+    grid-area: img6;
+}
+#galeria .siatka .img7{
+    grid-area: img7;
+}
+#galeria .siatka .img8{
+    grid-area: img8;
+}
+#galeria .siatka .img9{
+    grid-area: img9;
+}
+#galeria .siatka .img10{
+    grid-area: img10;
+}
+#kontakt{
+    display: flex;
+}
+#kontakt .mapa{
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#kontakt .mapa iframe{
+    width: 100%;
+    height:90%;
+    margin:15px;
+    background:#eee;
+    padding:5px;
+    border:0;
+}
+#kontakt .formularz{
+    flex:2;
+}
+#kontakt .formularz form{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding:20px;
+    flex-direction: column;
+    gap: 15px;
+    width:100%;
+}
+#kontakt .formularz input[type="text"],
+#kontakt .formularz input[type="email"],
+#kontakt .formularz input[type="tel"]{/*definicje dla pól input danego typu*/
+    width: 100%;
+    height: 48px;
+    padding:5px 10px;
+    border-radius: 0;
+    border:1px solid #444;
+}
+#kontakt .formularz form fieldset{
+    padding:20px;
+    width:100%;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+}
+#kontakt .formularz form fieldset .wiersz{
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    align-items: center;
+}
+#kontakt .formularz form .wiersz{
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    align-items: center;
+}
+#kontakt .formularz form .radio{
+    flex-direction: row;
+}
+#kontakt .formularz form .radio .opcja{
+    display: flex;
+    gap: 15px;
+    flex:1;
+    justify-content: center;
+}
+#kontakt .formularz form textarea{/*definicja dla pola tekstowego*/
+    width:100%;
+    height: 250px;
+    resize: vertical;/*zablokowanie możliwości skalowania poziomego*/
+    padding:5px 10px;
+    border-radius: 0;
+    border:1px solid #444;
+}
+#kontakt .formularz form legend{
+    padding: 0 10px;
+}
+#kontakt .formularz form input[type="submit"]{/*definicje dla guzika wysyłającego formularz*/
+    width:50%;
+    background: #000;
+    color:#fff;
+    padding:8px 10px;
+    align-self: flex-end;
+    border: 0;
+    transition: 0.7s;
+}
+#kontakt .formularz form input[type="submit"]:hover{
+    background:#c00;
+}
+#kontakt .formularz form input:focus,
+#kontakt .formularz form textarea:focus{/*definicje dla zaznaczonych (aktywnych) pól*/
+    background: #000;
+    color:#fff;
+}
+#kontakt .formularz form input[type="radio"],
+#kontakt .formularz form input[type="checkbox"]{
+    height:30px;
+    width:30px;
+}
+#tak, #nie, #nie_wiem, #zgoda, #zgoda-news{/*zmiana kolorów zaznaczenia dla pól posiadających dane identyfikatory*/
+    accent-color: #c00;
+}
+footer{
+    min-height:250px;
+    background: #000;
+    display: flex;
+    padding:40px;
+    color:#fff;
+    gap:20px;
+    flex-direction: column;
+    align-items: center;
+    line-height: 2rem;
+}
+footer .gora{
+    display: flex;
+    gap: 40px;
+    width: 75%;
+}
+footer .gora .kolumna{
+    flex: 1;
+}
+footer a{
+    color: #fff;
+    text-decoration: none;
+    transition: 0.7s;
+}
+footer a:hover{
+    color:#c00;
+}
+footer img{
+    height: 80px;
+    width: auto;
+    filter: invert(1);/*odwrócenie koloru na kolor przeciwny w skali kolorów*/
+}
+footer h3{
+    font-weight: 200;
+    margin-bottom: 20px;
+}
+footer ul{
+    list-style: none;
+}
+footer .zapis{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+footer .zapis input[type="email"]{
+    background: none;
+    border: 1px solid #fff;
+    padding: 8px 10px;
+    color: #fff;
+    height: 40px;
+}footer .zapis input[type="email"]:focus{/*dodanie właściwości dla aktywnego pola*/
+    background:#fff;
+    color: #000;
+}
+footer .zapis a{
+    border: 1px solid #fff;
+    padding: 8px 20px;
+    width: 50%;
+    text-align: center;
+    align-self: flex-end;
+    transition: 0.7s;
+}
+footer .zapis a:hover{
+    background: #fff;
+    color: #000;
+}
+footer .dol{
+    border-top: 1px solid rgba(255,255,255,0.6);
+    margin-top: 30px;
+    padding-top: 30px;
+    width: 75%;
+    text-align: center;
+}
+.fullheight{
+    min-height: calc(100vh - var(--header-height));/*minimalna wysokość bloku z tą klasą jest obliczana przez przeglądarkę. 100vh (viewport height) to 100% wysokości ekranu urządzenia i od tego jest odejmowana wysokość headera, zdefiniowana w grupie root.*/
+    scroll-margin-top: var(--header-height); /*ustawia margines początkowy sekcji uwzględniając wysokość sekcji header, aby zawartość sekcji nie chowała się pod nagłówkiem*/
+}
+/*Ikonka dzwonienia*/
+.zadzwon{
+    position: fixed;/*przyklejenie w pewnym miejscu okna przeglądarki względem całego elementu body*/
+    bottom: 40px;/*40 pikseli od dołu*/
+    left: 40px;/*i 40px od lewej*/
+    background: #060;
+    width: 100px;
+    height: 100px;
+    z-index: 999;/*wyciągamy na górną warstwę*/
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;/*flex wyśrodkuje elementy wewnątrz, w tym przypadku ikonkę słuchawki*/
+    font-size: 2.5rem;
+    animation: pulsowanie 2s infinite;/*dodaje animację pulsowania. animacja obracania elementu pochodzi z font awesome*/
+}
+@keyframes pulsowanie{
+    0%{
+        transform: scale(0.95);/*pomniejszenie do 95%*/
+        box-shadow: 0 0 0 0 rgba(0,100,0,0.7);/*dodanie cienia z kryciem 70%*/
+    }
+    70%{
+        transform: scale(1);/*wielkość oryginalna*/
+        box-shadow: 0 0 0 12px rgba(0,100,0,0);/*cień z rozmyciem na 12px i pełną przezroczystością*/
+    }
+    100%{
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(0,100,0,0);
+    }
+}
+.zadzwon a{
+    color: #fff;
+}
+/*tryb dark mode*/
+.tryb label{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+.tryb label span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #777;
+    cursor: pointer;/*zamienia wygląd kursora ze strzałki na łapkę*/
+    user-select: none;/*domyślnie element nie jest zaznaczony*/
+    transition: 0.7s;
+}
+.tryb label .action{
+    position: relative;
+}
+.tryb label .action i{/*tworzy pole suwaka, w którym będzie się znajdowała przesuwana kulka*/
+    position: relative;/*spowoduje, że elementy wewnątrz będą pozycjonowane względem tego elementu*/
+    width: 40px;
+    height: 20px;
+    background: #aaa;
+    border-radius: 15px;/*promień obramowania ustawiamy na większy niż połowa wysokości elementu*/
+    transition: 0.7s;
+}
+.tryb label .action i::before{/*beforem tworzymy kulkę wewnątrz elementu i*/
+    content: '';
+    height: 15px;/*wysokość obliczamy odejmując od wysokości elementu i podwojony odstęp - z góry z dołu po tyle samo (czyli 20px - 2*2.5px)*/
+    width: 15px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0,0.15);
+    position: absolute;/*element zostaje wypozycjonowany względem pierwszego napotkanego wyżej, posiadającego position:relative*/
+    top:2.5px;/*od góry elementu element będzie oddalony o 2.5px*/
+    left: 2.5px;/*i o tyle samo od lewej*/
+    transition: 0.7s;
+}
+.tryb label .action input:checked ~ i::before{/* znaczek ~ powoduje wybranie każdego elementu i poprzedzonego elementem input:checked - czyli w tym przypadku zaznaczonego checkboxa*/
+    left: calc(100% - 17.5px);
+    /*po zaznaczeniu checkboxa element powinien się przesunąć o pełną szerokość pola, od której odejmujemy szerokość elementu oraz odstęp od prawej krawędzi elementu, w którym się znajduje (czyli 15 + 2.5px)*/
+}
+.tryb label .action input{
+    appearance: none;/*ukrycie elementu z zachowaniem jego funkcjonalności. w tym przypadku checkbox zostaje checkboxem, który po kliknięciu w label dodaje mu status checked*/
+}
+.tryb label .action input:checked ~ i{
+    background: #060;
+}
+/*Tryb ciemny*/
+.darkmode{
+    background: #222;
+}
+.darkmode p,
+.darkmode h1,
+.darkmode h2,
+.darkmode h3,
+.darkmode label,
+.darkmode legend,
+.darkmode .socialki a,
+.darkmode nav a{
+    color:#fff;
+}
+.darkmode #o-nas .opis h2::after{
+    background: #fff;
+}
+.darkmode header{
+    background: #000;
+}
+.darkmode header img{
+    filter: invert(1);
+}
+/*menu mobilne*/
+.mobilebtn{
+    font-size: 2rem;
+    margin-right: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    order: 5;/*przesuwa etykietę checkboxa (ikonę hamburger menu) na sam koniec nagłówka*/
+    display: none;
+}
+#mobile{
+    display: none;
+}
+@media (max-width:991px){/*parametr @media określa, dla jakiś rozdzielczości ekranu - zgodnie z normą dla ekranów - będą się wyświetlały wstawione poniżej klasy, id i elementy html*/
+    .mobilebtn{
+        display: block;
+    }
+    header nav{
+        width: 100%;
+        position: absolute;
+        top: var(--header-height);/*przesunięcie od góry o wysokość nagłówka*/
+        left: -100%;/*schowanie menu poza ekranem*/
+        height: calc(100vh - var(--header-height));/*wysokość menu to wysokość okna urządzenia pomniejszona o wysokość nagłówka*/
+        flex-direction: column;
+        background: #222;
+        transition: all 0.7s;
+    }
+    header nav li a{
+        color:#fff;
+    }
+    #mobile:checked ~ nav{
+        left: 0;/*w momencie kiedy checkbox za pomocą którego chcemy wyświetlić menu mobilne jest zaznaczony, wówczas wszystkie elementy w klasie .menu*/
+    }
+    #o-nas,#kontakt,footer .gora{
+        flex-direction: column;/*zmiana kierunku wyświetlania flexa na kolumnę*/
+    }
+    #o-nas .opis p{
+        column-count: 1;/*zmiana ilości kolumn dla tekstu*/
+    }
+    #panele{
+        display: block;/*zmiana sposobu wyświetlania z flexa na bloki*/
+    }
+    #panele .panel{
+        width: 80%;
+        margin: 10px auto;
+        display: block;
+    }
+    #kontakt .mapa iframe{
+        height: 400px;
+    }
+    #galeria .siatka{
+        grid-template-columns: 1fr 1fr;/*układ galerii zmieniony na urządzeniach mobilnych na dwie kolumny*/
+        grid-template-rows: 200px;/*zdefiniowanie wysokości pierwszego wiersza*/
+        grid-auto-rows: 200px;/*zdefiniowanie wyskości każdego kolejnego wiersza, który będzie sobie automatycznie dodawała przeglądarka w zależności od ilości występujących elementów*/
+        grid-template-areas: "img1 img2"/*zdefiniowanie od nowa nazw obszarów występujących w siatce*/
+                             "img3 img4"
+                             "img5 img6"
+                             "img7 img8"
+                             "img9 img10";
+    }
+}
+/*.test{
+    width: 300px;
+    height:150px;
+    background: yellow;
+    padding: 20px;
+}
+.kolko{
+    width: 150px;
+    height: 150px;
+    background: green;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+}*/
