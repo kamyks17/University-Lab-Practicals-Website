@@ -1,5 +1,8 @@
 # University-Lab-Practicals-Website
 
+DEMO:
+https://kamyks17.github.io/University-Lab-Practicals-Website/
+
 The website was created as part of my university practical classes. Built mainly using HTML, CSS, and some JavaScript.
 
 <img width="1868" height="921" alt="image" src="https://github.com/user-attachments/assets/1e1405f0-47eb-4e3d-9a2f-ca60e32138a4" />
